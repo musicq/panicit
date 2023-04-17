@@ -1,0 +1,38 @@
+{
+  "name": "panicit",
+  "version": "1.0.0",
+  "description": "Exit or throw error immediately.",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
+    }
+  },
+  "repository": "musicq/panicit",
+  "scripts": {
+    "build": "tsup src/index.ts --dts --minify --format cjs,esm",
+    "prepublish": "npm run build",
+    "test": "vitest",
+    "coverage": "vitest run --coverage",
+    "typecheck": "vitest typecheck"
+  },
+  "keywords": [
+    "panic",
+    "error handler"
+  ],
+  "files": [
+    "dist"
+  ],
+  "author": "musicq <kui.liang.sg@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@vitest/coverage-c8": "^0.29.3",
+    "tsup": "^6.6.3",
+    "typescript": "^5.0.2",
+    "vitest": "^0.29.3"
+  }
+}

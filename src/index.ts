@@ -1,0 +1,1 @@
+export {panic} from './panic';
