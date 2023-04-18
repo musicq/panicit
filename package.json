@@ -1,6 +1,6 @@
 {
   "name": "panicit",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Exit or throw error immediately.",
   "type": "module",
   "main": "./dist/index.cjs",
