@@ -1,10 +1,21 @@
 import { isNode } from './helper'
 
-export function panic(
-  message: any,
-  opt?: { exitCode?: number; cause?: any }
-): never {
-  console.error(message, opt?.cause ? `\n[Cause] ${opt.cause}` : '')
+export type PanicOption = {
+  cause?: any
+  exitCode?: number
+  silent?: boolean
+}
+
+export function panic(message: any, opt?: PanicOption): never {
+  if (!opt?.silent) {
+    if (!opt?.cause) {
+      console.error('[panic]', message)
+    } else {
+      console.group('[panic]', message)
+      console.error('[Cause]', opt.cause)
+      console.groupEnd()
+    }
+  }
 
   if (isNode) {
     process.exit(opt?.exitCode ?? 1)
