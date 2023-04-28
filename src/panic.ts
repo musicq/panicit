@@ -1,9 +1,10 @@
-import { isNode } from './helper'
+import {isNode} from './helper'
 
 export type PanicOption = {
   cause?: any
   exitCode?: number
   silent?: boolean
+  shouldExit?: boolean
 }
 
 export function panic(message: any, opt?: PanicOption): never {
@@ -17,7 +18,7 @@ export function panic(message: any, opt?: PanicOption): never {
     }
   }
 
-  if (isNode) {
+  if (isNode && opt?.shouldExit !== false) {
     process.exit(opt?.exitCode ?? 1)
   }
 
