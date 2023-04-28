@@ -60,3 +60,12 @@ test('silent output', () => {
   expect(mockConsoleGroup).not.toBeCalled()
   expect(mockConsoleError).not.toBeCalled()
 })
+
+test('do not exit if opt.exit is false', () => {
+  expect(() =>
+    panic({ error: 'some error' }, { cause: 'some cause', shouldExit: false })
+  ).toThrowErrorMatchingInlineSnapshot('"[object Object]"')
+  expect(mockProcessExit).not.toHaveBeenCalled()
+  expect(mockConsoleGroup).toBeCalled()
+  expect(mockConsoleError).toBeCalled()
+})
