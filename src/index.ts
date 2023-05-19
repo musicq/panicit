@@ -1,1 +1,1 @@
-export {panic} from './panic';
+export {panic, setShouldExitByDefault} from './panic';
