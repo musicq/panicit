@@ -63,7 +63,7 @@ test('silent output', () => {
 
 test('do not exit if opt.exit is false', () => {
   expect(() =>
-    panic({ error: 'some error' }, { cause: 'some cause', shouldExit: false })
+    panic({ error: 'some error' }, { cause: 'some cause', exit: false })
   ).toThrowErrorMatchingInlineSnapshot('"[object Object]"')
   expect(mockProcessExit).not.toHaveBeenCalled()
   expect(mockConsoleGroup).toBeCalled()

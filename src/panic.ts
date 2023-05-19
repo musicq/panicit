@@ -5,6 +5,7 @@ export type PanicOption = {
   exitCode?: number
   silent?: boolean
   shouldExit?: boolean
+  exit?: boolean
 }
 
 export function panic(message: any, opt?: PanicOption): never {
@@ -17,8 +18,13 @@ export function panic(message: any, opt?: PanicOption): never {
       console.groupEnd()
     }
   }
+  let shouldExit = opt?.exit
 
-  if (isNode && opt?.shouldExit !== false) {
+  if (opt?.shouldExit !== undefined && opt?.exit == undefined) {
+    shouldExit = opt.shouldExit
+  }
+
+  if (isNode && shouldExit !== false) {
     process.exit(opt?.exitCode ?? 1)
   }
 

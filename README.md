@@ -32,7 +32,7 @@ Uncaught Error: some reason
 
 **with cause**
 
-You can also provide the cause.
+You can provide the cause as well.
 
 ```ts
 import { panic } from 'panicit'
@@ -69,3 +69,16 @@ some reason
 ➜ echo $?
 2
 ```
+
+## Prevent exit
+
+By default, `panic` will exit the program in Node.js, but you can set `exit`
+option to false to disable this behavior.
+
+```ts
+panic('some error', { exit: false })
+```
+
+> Note that exit program can only be used in Node environment.
+
+> Alias name `shouldExit` has been deprecated.
