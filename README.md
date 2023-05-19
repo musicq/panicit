@@ -70,7 +70,7 @@ some reason
 2
 ```
 
-## Prevent exit
+### Prevent exit
 
 By default, `panic` will exit the program in Node.js, but you can set `exit`
 option to false to disable this behavior.
@@ -82,3 +82,20 @@ panic('some error', { exit: false })
 > Note that exit program can only be used in Node environment.
 
 > Alias name `shouldExit` has been deprecated.
+
+### Default exit behavior
+
+You can define whether should the program exit by default or not by using
+`setShouldExitByDefault`.
+
+```ts
+import { setShouldExitByDefault } from 'panicit'
+
+setShouldExitByDefault(false)
+
+// this won't exit the program
+panic('some error')
+
+// you can still exit the program by set `exit` to `true` explicitly
+panic('some error', { exit: true })
+```

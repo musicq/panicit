@@ -1,6 +1,6 @@
 import {afterEach, describe, expect, test, vi} from 'vitest'
 import {panic} from '../src'
-import {shouldExitByDefault} from '../src/panic'
+import {setShouldExitByDefault} from '../src/panic'
 
 const mockProcessExit = vi
   .spyOn(process, 'exit')
@@ -73,7 +73,7 @@ test('do not exit if opt.exit is false', () => {
 
 describe('default exit behavior', () => {
   test("shouldn't exit by default", () => {
-    shouldExitByDefault(false)
+    setShouldExitByDefault(false)
 
     expect(() =>
       panic({ error: 'some error' }, { cause: 'some cause' })
@@ -84,7 +84,7 @@ describe('default exit behavior', () => {
   })
 
   test('should respect exit in option', () => {
-    shouldExitByDefault(false)
+    setShouldExitByDefault(false)
 
     expect(() =>
       panic({ error: 'some error' }, { cause: 'some cause', exit: true })

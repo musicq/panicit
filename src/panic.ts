@@ -8,10 +8,10 @@ export type PanicOption = {
   exit?: boolean
 }
 
-let _shouldExitByDefault = true
+let shouldExitByDefault = true
 
-export function shouldExitByDefault(exit: boolean) {
-  _shouldExitByDefault = Boolean(exit)
+export function setShouldExitByDefault(exit: boolean) {
+  shouldExitByDefault = Boolean(exit)
 }
 
 export function panic(message: any, opt?: PanicOption): never {
@@ -25,7 +25,7 @@ export function panic(message: any, opt?: PanicOption): never {
     }
   }
 
-  let shouldExit = opt?.exit == undefined ? _shouldExitByDefault : opt.exit
+  let shouldExit = opt?.exit == undefined ? shouldExitByDefault : opt.exit
 
   if (opt?.shouldExit !== undefined && opt?.exit == undefined) {
     shouldExit = opt.shouldExit
