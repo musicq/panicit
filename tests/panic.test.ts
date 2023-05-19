@@ -1,5 +1,6 @@
-import {afterEach, expect, test, vi} from 'vitest'
+import {afterEach, describe, expect, test, vi} from 'vitest'
 import {panic} from '../src'
+import {shouldExitByDefault} from '../src/panic'
 
 const mockProcessExit = vi
   .spyOn(process, 'exit')
@@ -68,4 +69,28 @@ test('do not exit if opt.exit is false', () => {
   expect(mockProcessExit).not.toHaveBeenCalled()
   expect(mockConsoleGroup).toBeCalled()
   expect(mockConsoleError).toBeCalled()
+})
+
+describe('default exit behavior', () => {
+  test("shouldn't exit by default", () => {
+    shouldExitByDefault(false)
+
+    expect(() =>
+      panic({ error: 'some error' }, { cause: 'some cause' })
+    ).toThrowErrorMatchingInlineSnapshot('"[object Object]"')
+    expect(mockProcessExit).not.toHaveBeenCalled()
+    expect(mockConsoleGroup).toBeCalled()
+    expect(mockConsoleError).toBeCalled()
+  })
+
+  test('should respect exit in option', () => {
+    shouldExitByDefault(false)
+
+    expect(() =>
+      panic({ error: 'some error' }, { cause: 'some cause', exit: true })
+    ).toThrowErrorMatchingInlineSnapshot('"[object Object]"')
+    expect(mockProcessExit).toHaveBeenCalled()
+    expect(mockConsoleGroup).toBeCalled()
+    expect(mockConsoleError).toBeCalled()
+  })
 })
