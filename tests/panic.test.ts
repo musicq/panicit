@@ -51,7 +51,7 @@ describe('panicit', () => {
 
   it('panic with error code = 2 and error cause', () => {
     expect(() =>
-      panic('error message', {exitCode: 2, cause: 'error cause'}),
+      panic('error message', {exitCode: 2, cause: 'error cause'})
     ).toThrowError()
     expect(mockProcessExit).toHaveBeenCalledOnce()
     expect(mockProcessExit).toBeCalledWith(2)
@@ -63,25 +63,25 @@ describe('panicit', () => {
 
   it('error and cause are objects', () => {
     expect(() =>
-      panic({error: 'some error'}, {cause: {reason: 'some cause'}}),
+      panic({error: 'some error'}, {cause: {reason: 'some cause'}})
     ).toThrowError()
     expect(mockProcessExit).toHaveBeenCalledOnce()
     expect(mockProcessExit).toBeCalledWith(1)
     expect(mockConsoleGroup).toBeCalledTimes(1)
     expect(mockConsoleGroup).toHaveBeenCalledWith(
       '[Panic]',
-      expect.objectContaining({error: 'some error'}),
+      expect.objectContaining({error: 'some error'})
     )
     expect(mockConsoleError).toBeCalledTimes(1)
     expect(mockConsoleError).toHaveBeenCalledWith(
       '[Cause]',
-      expect.objectContaining({reason: 'some cause'}),
+      expect.objectContaining({reason: 'some cause'})
     )
   })
 
   it('silent output', () => {
     expect(() =>
-      panic({error: 'some error'}, {cause: 'some cause', silent: true}),
+      panic({error: 'some error'}, {cause: 'some cause', silent: true})
     ).toThrowError()
     expect(mockProcessExit).toHaveBeenCalledOnce()
     expect(mockProcessExit).toBeCalledWith(1)
@@ -91,7 +91,7 @@ describe('panicit', () => {
 
   it('do not exit if opt.exit is false', () => {
     expect(() =>
-      panic({error: 'some error'}, {cause: 'some cause', exit: false}),
+      panic({error: 'some error'}, {cause: 'some cause', exit: false})
     ).toThrowError()
     expect(mockProcessExit).not.toHaveBeenCalled()
     expect(mockConsoleGroup).toBeCalled()
@@ -110,7 +110,7 @@ describe('panicit', () => {
 
     it('overrides global config with inline config', () => {
       expect(() =>
-        panic({error: 'some error'}, {exit: true, silent: true, exitCode: 2}),
+        panic({error: 'some error'}, {exit: true, silent: true, exitCode: 2})
       ).toThrowError()
       expect(mockProcessExit).toBeCalledWith(2)
       expect(mockConsoleGroup).not.toBeCalled()
