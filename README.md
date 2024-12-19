@@ -16,7 +16,7 @@ npm i panicit
 ## Usage
 
 ```ts
-import { panic } from 'panicit'
+import {panic} from 'panicit'
 
 panic('some error')
 ```
@@ -35,9 +35,9 @@ Uncaught Error: some reason
 You can provide the cause as well.
 
 ```ts
-import { panic } from 'panicit'
+import {panic} from 'panicit'
 
-panic('some error', { cause: 'some cause' })
+panic('some error', {cause: 'some cause'})
 ```
 
 It will print
@@ -53,9 +53,9 @@ Error: some reason
 If you are using Node.js, you can also provide exit code.
 
 ```ts
-import { panic } from 'panicit'
+import {panic} from 'panicit'
 
-panic('some error', { cause: 'some cause', exitCode: 2 })
+panic('some error', {cause: 'some cause', exitCode: 2})
 ```
 
 Result
@@ -76,26 +76,54 @@ By default, `panic` will exit the program in Node.js, but you can set `exit`
 option to false to disable this behavior.
 
 ```ts
-panic('some error', { exit: false })
+panic('some error', {exit: false})
 ```
 
 > Note that exit program can only be used in Node environment.
 
-> Alias name `shouldExit` has been deprecated.
-
 ### Default exit behavior
 
 You can define whether should the program exit by default or not by using
-`setShouldExitByDefault`.
+`definePanicitConfig`.
 
 ```ts
-import { setShouldExitByDefault } from 'panicit'
+import {definePanicitConfig} from 'panicit'
 
-setShouldExitByDefault(false)
+definePanicitConfig({exit: false})
 
 // this won't exit the program
 panic('some error')
 
 // you can still exit the program by set `exit` to `true` explicitly
-panic('some error', { exit: true })
+panic('some error', {exit: true})
+```
+
+### Options
+
+Inline panic option, used as the second parameter of `panic` function.
+
+```ts
+type PanicOption = {
+  /** Note the cause of why the error is triggered. */
+  cause?: any
+  /** Should log panic message. */
+  silent?: boolean
+  /** Only works in Node.js env. */
+  exit?: boolean
+  /** Only works in Node.js env. */
+  exitCode?: number
+}
+```
+
+Global panic config.
+
+```ts
+type PanicConfig = {
+  /** Should log panic message. */
+  silent?: boolean
+  /** Only works in Node.js env. */
+  exit?: boolean
+  /** Only works in Node.js env. */
+  exitCode?: number
+}
 ```
