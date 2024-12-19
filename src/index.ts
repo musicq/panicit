@@ -1,1 +1,2 @@
-export {panic, setShouldExitByDefault} from './panic';
+export {panic, definePanicitConfig} from './panic'
+export type {PanicConfig, PanicOption} from './panic'
