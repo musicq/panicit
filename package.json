@@ -1,6 +1,6 @@
 {
   "name": "panicit",
-  "version": "1.3.0",
+  "version": "2.0.0",
   "description": "Exit or throw error immediately.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -8,9 +8,9 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "require": "./dist/index.cjs",
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "import": "./dist/index.js"
     }
   },
   "repository": "musicq/panicit",
